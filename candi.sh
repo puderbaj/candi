@@ -572,6 +572,22 @@ guess_platform() {
     elif [ ! -z "$CRAYOS_VERSION" ]; then
         echo cray
 
+    elif [ -f /etc/os-release ]; then
+        . /etc/os-release
+	   if [ "${PRETTY_NAME}" == "openSUSE Leap 15.0" ] ||
+          [ "${PRETTY_NAME}" == "openSUSE Leap 15.1" ] ||
+          [ "${PRETTY_NAME}" == "openSUSE Leap 15.2" ]; then
+            echo opensuse15
+        fi
+
+        if [ "${PRETTY_NAME}" == "Manjaro Linux" ]; then
+            echo arch
+        fi
+
+        if [ "${PRETTY_NAME}" == "Arch Linux" ]; then
+            echo arch
+        fi
+
     elif [ -x /usr/bin/lsb_release ]; then
         local OSVER=$(lsb_release -r -s  |grep -o -E '[0-9]+' |head -n 1)
 
@@ -597,17 +613,6 @@ guess_platform() {
                 *:*:*openSUSE\ 15*)   echo opensuse15;;
             esac
         fi
-    elif [ -f /etc/os-release ]; then
-	. /etc/os-release
-	if [ "${PRETTY_NAME}" == "openSUSE Leap 15.0" ]; then
-	    echo opensuse15
-	fi
-	if [ "${PRETTY_NAME}" == "Manjaro Linux" ]; then
-	    echo arch
-	fi
-	if [ "${PRETTY_NAME}" == "Arch Linux" ]; then
-	    echo arch
-	fi
     fi
 }
 
