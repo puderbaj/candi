@@ -10,7 +10,7 @@
 #          binutils-gold mpich-devel blas-devel lapack-devel'
 #
 # optional packages:
-# Modules doxygen graphviz graphviz-devel devel_qt4 splint
+# Modules doxygen graphviz graphviz-devel splint
 #
 # Then reboot and run candi again.
 #
